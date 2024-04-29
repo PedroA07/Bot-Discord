@@ -1,0 +1,40 @@
+import discord
+from discord.ext import commands
+from discord import app_commands
+import os
+from colorama import Fore, Back, Style
+import time
+import platform
+from dotenv import load_dotenv
+
+# Carrega o token do bot a partir de um arquivo de configuração separado
+load_dotenv()
+
+class client(discord.Client):
+    def __init__(self):
+        super().__init__(intents=discord.Intents.default())
+        self.synced = False #Para o bot não sincronizar mais de uma vez
+
+    async def setup_hook(self) -> None:
+        pass
+
+    async def on_ready(self):
+        await self.wait_until_ready()
+        if not self.synced: #Checar se os comandos slash foram sincronizados
+            await tree.sync(guild = discord.Object())
+            self.synced = True
+        print(f"Entramos como {self.user}.")
+
+aclient = client()
+tree = app_commands.CommandTree(aclient)
+
+@tree.command(name = "teste", description = "Testando")
+
+async def slash2(interaction: discord.Interaction):
+    await interaction.response.send_message(f"Bot funcionando!", ephemeral = True)
+
+
+# Carrega o TOKEN
+TOKEN = os.getenv('DISCORD_TOKEN')
+# Executa o client
+client.run(TOKEN)
