@@ -36,11 +36,11 @@ class Moderations(commands.Cog):
             # Criando Embed para eviar a mensagem
             embed = discord.Embed(
                 title="✅ CHAT LIMPO!",
-                description=f"O chat teve ` {len(msg_limpas)} ` de mensagens apagadas!",
+                description=f"O chat teve ` {len(msg_limpas)} ` mensagens apagadas!",
                 color= discord.Color.blue(),
                 timestamp=interaction.created_at
             )
-            embed.set_footer(text = f"Por: **{interaction.user.name}**")
+            embed.set_footer(text = f"Por: {interaction.user.name}")
             await interaction.channel.send(embed=embed) # Enviando mensagem de confirmação
 
 
